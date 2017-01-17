@@ -1,0 +1,15 @@
+# -*- mode: Makefile -*-
+
+# Change this path to where Blender (on Windows) is installed
+BLENDER_PATH="/cygdrive/c/Program\ Files/Blender\ Foundation/Blender/2.78/python/bin/python.exe"
+
+all: build
+
+clean:
+	@cygstart --showminnoactive --wait --action=runas "$(BLENDER_PATH)" setup.py $@ --all 2>&1
+
+build:
+	@"$(BLENDER_PATH)" setup.py $@ 2>&1
+
+install:
+	@cygstart --showminnoactive --wait --action=runas "$(BLENDER_PATH)" setup.py $@ 2>&1
