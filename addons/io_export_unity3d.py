@@ -1,5 +1,5 @@
 # MIT License
-# 
+#
 # Copyright (c) 2017 Israel Jacquez
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -72,14 +72,21 @@ class ExportUnity3D(bpy.types.Operator, io_utils.ExportHelper):
 
         def _rotate_mesh(obj, is_root):
             _translate_object(obj, is_root)
+            location, rotation, scale = obj.matrix_local.decompose()
+            rotation_matrix = (_rotate_axis(180.0, 'Z') * _rotate_axis(90.0, 'X')) * rotation.to_matrix().to_4x4()
             mesh = obj.data
             new_bmesh = bmesh.new()
             new_bmesh.from_mesh(mesh)
             unique_verts = sorted(list(set([vert for face in new_bmesh.faces for vert in face.verts])),
                                   key = lambda vert: vert.index)
-            bmesh.ops.rotate(new_bmesh, cent = (0.0, 0.0, 0.0), matrix = _rotate_axis(180.0, 'Z') * _rotate_axis(90.0, 'X'), verts = unique_verts)
+            bmesh.ops.scale(new_bmesh, vec = scale, verts = unique_verts)
+            bmesh.ops.rotate(new_bmesh, cent = (0.0, 0.0, 0.0), matrix = rotation_matrix, verts = unique_verts)
             new_bmesh.to_mesh(mesh)
             mesh.update()
+            new_bmesh.free()
+            obj.rotation_euler = (0.0, 0.0, 0.0)
+            obj.scale = (1.0, 1.0, 1.0)
+            bpy.context.scene.update()
             if is_root:
                 matrix = _rotate_axis(-90.0, 'X').inverted() * obj.matrix_local
                 _, R, _ = matrix.decompose()
