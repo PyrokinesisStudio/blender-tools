@@ -6,7 +6,7 @@ A collection of Blender addons and Python modules for game development.
 
 ### Installation
 
-Before the addons can be used, the Python modules in [`modules/`](https://github.com/ijacquez/blender_tools/tree/master/modules/helper_utils) need to be installed first.
+Before the addons can be used, the Python modules in [`modules/`](https://github.com/ijacquez/blender_tools/tree/master/modules) need to be installed first.
 
 #### Windows
  1. For every module, modify the absolute path to `blender.exe` in `Makefile.cygwin`
