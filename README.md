@@ -1,4 +1,4 @@
-[![Blender](https://raw.githubusercontent.com/ijacquez/blender_tools/master/blender-socket.png)](https://www.blender.org/)
+[![Blender](https://raw.githubusercontent.com/ijacquez/blender_tools/master/.images/blender-socket.png)](https://www.blender.org/)
 
 ### About
 
