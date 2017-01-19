@@ -7,7 +7,7 @@ setup(name = 'Helper tools',
       description = 'Blender Python helper utilities',
       author = 'Israel Jacquez',
       author_email = 'mrkotfw@gmail.com',
-      url = 'https://github.com/ijacquez/blender_tools',
+      url = 'https://github.com/ijacquez/blender-tools',
       packages = ['helper_utils'],
       package_dir = {
           'helper_utils': 'lib'

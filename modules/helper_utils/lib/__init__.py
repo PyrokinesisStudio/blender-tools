@@ -1,3 +1,5 @@
+__all__ = ("mesh")
+
 def bu_to_inches(d):
     """Return Blender unit d in inches."""
     import bpy
