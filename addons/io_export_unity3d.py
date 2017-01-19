@@ -44,6 +44,23 @@ from bpy_extras import io_utils
 
 import helper_utils
 
+class PropertiesExportUnity3DOptions(bpy.types.Panel):
+    bl_label = "Unity3D"
+    bl_space_type = "PROPERTIES"
+    bl_region_type = "WINDOW"
+    bl_context = "object"
+
+    save_mesh = bpy.props.BoolProperty(name = "Save mesh",
+                                       description = "Designate this mesh to be saved",
+                                       default = False)
+
+    def draw(self, context):
+        layout = self.layout
+        row = layout.row()
+        row.label(text = "Mesh export options:")
+        row = layout.row()
+        row.prop(context.object, "save_mesh", text = "Save mesh")
+
 class ExportUnity3D(bpy.types.Operator, io_utils.ExportHelper):
     bl_idname = "export_scene.export_unity3d"
     bl_label = "Export Unity3D (.fbx)"
@@ -158,10 +175,12 @@ def menu_export_unity3d(self, context):
     self.layout.operator(ExportUnity3D.bl_idname, text = ExportUnity3D.bl_label)
 
 def register():
+    bpy.utils.register_class(PropertiesExportUnity3DOptions)
     bpy.utils.register_class(ExportUnity3D)
     bpy.types.INFO_MT_file_export.append(menu_export_unity3d)
 
 def unregister():
+    bpy.utils.unregister_class(PropertiesExportUnity3DOptions)
     bpy.utils.unregister_class(ExportUnity3D)
     bpy.types.INFO_MT_file_export.remove(menu_export_unity3d)
 
