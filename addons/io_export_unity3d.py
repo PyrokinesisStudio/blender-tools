@@ -154,7 +154,7 @@ class ExportUnity3D(bpy.types.Operator, io_utils.ExportHelper):
                 if obj.type == 'MESH':
                     _translate_object(obj, is_root)
                     _scale_mesh(obj, is_root)
-                    _rotate_mesh(obj, is_root, obj['apply_rotation'])
+                    _rotate_mesh(obj, is_root, obj.apply_rotation)
                 elif obj.type == 'CAMERA':
                     _translate_object(obj, is_root)
                     _rotate_camera(obj, is_root)
@@ -193,9 +193,11 @@ def menu_export_unity3d(self, context):
 
 def register():
     bpy.types.Object.save_mesh = bpy.props.BoolProperty(name = "save_mesh",
-                                                        description = "Determine if the mesh is to be save in Unity")
+                                                        description = "Determine if the mesh is to be save in Unity",
+                                                        default = True)
     bpy.types.Object.apply_rotation = bpy.props.BoolProperty(name = "apply_rotation",
-                                                             description = "Apply rotations to the mesh")
+                                                             description = "Apply rotations to the mesh",
+                                                             default = True)
 
     bpy.utils.register_class(PropertiesExportUnity3DOptions)
     bpy.utils.register_class(ExportUnity3D)
